@@ -10,7 +10,7 @@
 #include <sys/types.h>
 
 
-void printfull(char *string, int *desc);
+void printfull(char *string, int stream);
 void prompting(void);
 int main(void);
 void u_inputs(char *cmd, size_t size);

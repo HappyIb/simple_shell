@@ -1,16 +1,15 @@
 #include "shellth.h"
 
-/*
- * printfull - a function that prints a string or an interger
- *
+/**
+ * printfull - function to print string or int.
  * @string: string to print
- * @desc: file descriptor to write to
+ * @stream: the file descriptor to write to
  */
 
-void printfull(char *string, int *desc)
+void printfull(char *string, int stream)
 {
 	int n = 0;
 
 	for (n = 0; string[n]; n++)
-		write(STDOUT_FILENO, &string[n], 1);
+		write(stream, &string[n], 1);
 }

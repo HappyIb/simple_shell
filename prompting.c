@@ -1,10 +1,10 @@
-#include "shelth.h"
+#include "shellth.h"
 
-/*
+/**
  * prompting - a function to display the shell prompt
  */
 
 void prompting(void)
 {
-	printfull("if_shell$$");
+	printf("if_shell$$");
 }

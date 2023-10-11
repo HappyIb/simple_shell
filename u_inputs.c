@@ -1,6 +1,6 @@
 #include "shellth.h"
 
-/*
+/**
  * u_inputs - A function that accepts user input
  *
  * @cmd: A pointer to the buffer, user input storage
@@ -10,18 +10,24 @@
 
 void u_inputs(char *cmd, size_t size)
 {
-	if (fgets(cmd, size, stdin) == NULL)
+	ssize_t char_num;
+
+
+	char_num = getline(&cmd, &size, stdin);
 	{
+		if (char_num == -1)
+		{
 		if (feof(stdin))
 		{
-			printfull("\n");
+			printf("\n");
 			exit(EXIT_SUCCESS);
 		}
 		else
 		{
-			perror("fgets");
+			perror("getline");
 				exit(EXIT_FAILURE);
 		}
-		cmd[strcspn(cmd, "\n")] = '\0';     /*Remove newline*/
+		/*remove new line*/
+		cmd[num_char - 1] = '\0';
 	}
 }
