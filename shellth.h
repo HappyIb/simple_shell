@@ -12,8 +12,9 @@
 
 void printfull(char *string, int stream);
 void prompting(void);
-int main(void);
+int main(int argc, char**argv);
 void u_inputs(char *cmd, size_t size);
+void fi_fork(char **str, char **envi, int *status);
 
 
 #endif

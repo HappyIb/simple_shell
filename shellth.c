@@ -1,35 +1,29 @@
 #include "shellth.h"
+
 /**
- *
+ * main - entry point for the shell
+ * @argc: number of command-line arguments
+ * @argv: an array of pointers to string
+ * Return: 0 on success
  */
-int main(int argc, char**argv)
+int main(int argc, char **argv)
 {
-	
-f (argc < 2) {
-    printf("Usage: %s <command> <arguments>\n", argv[0]);
-    exit(1);
-  }
+	char *prompting = "if_shell$$ ";
+	char *lneptr;
+	size_t sze = 0;
 
-  // Create a new process to execute the command.
- 	pid_t pid = fork();
- 	if (pid == 0) {
-  	// Child process.
- 	execvp(argv[1], argv + 1);
+	(void)argc;
+	(void)argv;
 
- 	// If execvp fails, print an error message and exit.
- 	perror("execvp");
- 	exit(1);
-	}
-	else if (pid > 0)
+	while (1)
 	{
- 	// Parent process.
-	wait(NULL);
-        }
-	else
-	{
-	// Fork failed.
-	perror("fork");
-	exit(1);
+		printf("%s", prompting);
+		getline(&lneptr, &sze, stdin);
+		printf("%s\n", lneptr);
 	}
-	return(0);
+
+	if (lneptr != NULL)
+	{
+		free(lneptr);
+	}
 }

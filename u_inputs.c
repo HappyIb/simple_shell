@@ -28,6 +28,7 @@ void u_inputs(char *cmd, size_t size)
 				exit(EXIT_FAILURE);
 		}
 		/*remove new line*/
-		cmd[num_char - 1] = '\0';
+		cmd[char_num - 1] = '\0';
+		}
 	}
 }
