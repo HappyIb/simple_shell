@@ -21,8 +21,8 @@ unsigned int check_de(char c, const char *string)
 
 
 /**
- *
- *
+ * strtok - function breaks a string into a sequence of zero or more nonempty tokens
+ * 
  */
 char *strtok(char *string, const char *de)
 {
