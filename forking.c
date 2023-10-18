@@ -7,17 +7,19 @@
  */
 void fi_fork(char **str, char **envi, int *status)
 {
-	pid_t i_Pid; int fi_stat;
+	pid_t i_pid;
+	int fi_stat;
 
-	i_Pid = fork();
-	if (i_Pid == -1)
+	i_pid = fork();
+
+	if (i_pid == -1)
 	{
-		  free(str);
-		  perror("Forking Error");
-		  exit(EXIT_FAILURE);
+		free(str);
+		perror("Forking Error");
+		exit(EXIT_FAILURE);
 	}
 
-	if (i_Pid == 0)
+	if (i_pid == 0)
 	{
 		execve(str[0], str, envi);
 		free(str);

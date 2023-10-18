@@ -12,8 +12,8 @@
 
 void printfull(char *string, int stream);
 void prompting(void);
-int main(int argc, char**argv);
-void u_inputs(char *cmd, size_t size);
+int main(int argc, char **argv);
+char *strtok(char *string, const char *de);
 void fi_fork(char **str, char **envi, int *status);
 
 

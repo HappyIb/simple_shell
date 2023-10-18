@@ -11,6 +11,7 @@ int main(int argc, char **argv)
 	char *prompting = "if_shell$$ ";
 	char *lneptr;
 	size_t sze = 0;
+	ssize_t char_num;
 
 	(void)argc;
 	(void)argv;
@@ -18,7 +19,14 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		printf("%s", prompting);
-		getline(&lneptr, &sze, stdin);
+		char_num = getline(&lneptr, &sze, stdin);
+
+		if (char_num == -1)
+		{
+			printf("exiting if_shell...\n");
+			return (-1);
+		}
+
 		printf("%s\n", lneptr);
 	}
 
