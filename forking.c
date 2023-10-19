@@ -1,36 +1,50 @@
 #include "shellth.h"
+
 /**
- * fi_fork - creates a child process
- * @str: A pointer to an argument vector
- * @envi: A pointer to environment variables
- * @status: The integer value of the return status
+ * forking - creates a child process, executes the command.
+ * @str: A pointer to an argument vector.
+ * @envi: A pointer to environment variables.
+ * @stat: The integer value of the return status.
+ * Return: 0 on success, or -1 on failure.
  */
-void fi_fork(char **str, char **envi, int *status)
+int forking(char **str, char **envi, int *stat)
 {
-	pid_t i_pid;
-	int fi_stat;
+	pid_t child_pid;
+	int status;
 
-	i_pid = fork();
-
-	if (i_pid == -1)
+	child_pid = fork();
+	if (child_pid == -1)
 	{
-		free(str);
-		perror("Forking Error");
-		exit(EXIT_FAILURE);
+	perror("fork");
+	return (-1);
 	}
 
-	if (i_pid == 0)
+	if (child_pid == 0)
 	{
-		execve(str[0], str, envi);
-		free(str);
-		exit(EXIT_FAILURE);
+	execve(str[0], str, envi);
+	perror("execve");
+	exit(EXIT_FAILURE);
 	}
 
-	wait(&fi_stat);
-	if (fi_stat != 0)
-		*status = 2;
 
+	status = waitpid(child_pid, &status, 0);
+	if (status == -1)
+	{
+	perror("waitpid");
+	return (-1);
+	}
+
+
+	if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+	{
+		*stat = 2;
+	}
 	else
-		*status = 0;
+	{
+		*stat = 0;
+	}
+
 	free(str);
+
+	return (0);
 }
